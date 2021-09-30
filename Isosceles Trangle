@@ -19,4 +19,6 @@ while(j >=1){
 cout << j;
 j--;
 }
+cout << endl;
+row++;
 }
