@@ -1,0 +1,34 @@
+Write a program to generate the reverse of a given number N. Print the corresponding reverse number.
+Note : If a number has trailing zeros, then its reverse will not include them. For e.g., reverse of 10400 will be 401 instead of 00401
+
+#include<iostream>
+using namespace std;
+
+int main() {
+	// Write your code here
+    int n;
+    cin >> n;
+    int result = 0;
+    int temp = n;
+//     if(n == 0){
+//         result = 0;
+//     }else{
+//        while(n % 10 == 0){
+//         n = n/10;
+//     }  
+//     }
+   
+    
+//     while(n!=0){
+//     int temp = n%10;
+        
+//         result = result *10 + temp;
+//         n/=10;
+//     }
+    while(temp > 0){
+        int lastDigit = temp %10;
+        temp /=10;
+        result = result *10+ lastDigit;
+    }
+    cout << result;
+}
