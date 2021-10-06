@@ -1,0 +1,6 @@
+int result = 0;
+int pv = 1;
+result = result  + binaryDigit * pv;
+pv *= 10;
+
+e.g bits  are 0101 ---> 1010 (Means putting first digit to last and so on....)
