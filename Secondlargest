@@ -39,7 +39,7 @@ int main(){
         if(curr > max){
             secondMax = max;
             max = curr;
-        }else if(curr > secondMax && curr != max){
+        }else if(curr > secondMax && curr != max){ // Here curr != max solves if there is max element two or more times
             secondMax = curr;
         }
         count++;
