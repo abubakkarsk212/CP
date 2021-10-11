@@ -1,0 +1,30 @@
+e.g eye of tiger --> eyeoftiger
+
+void trimSpaces(char input[]) {
+    // Write your code here
+//     int count = 0;
+//     for(int i =0; input[i] != '\n'; i++){
+//         count++;
+//     }
+//     char temp[count];
+//     int tempI=0;
+//     for(int i =0; i<count; i++){
+//         if(input[i]!=' '){
+//             temp[tempI] = input[i];
+//             tempI++;
+//         }
+        
+//     }
+//     for(int k =0; temp[k]!='\n';k++){
+//         input[k]=temp[k];
+//     }
+    int j =0; // This kep track of space
+    
+    for(int i = 0; input[i]!='\n';i++){
+        if(input[i]!=' '){
+            input[j] = input[i];
+            j++;
+        }
+    }
+    
+}
