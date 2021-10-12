@@ -1,0 +1,63 @@
+
+Sample Input 1:
+Welcome to Coding Ninjas
+Sample Output 1:
+Ninjas Coding to Welcome
+
+void reverseWord(char arr[],int start, int end){
+    while(start < end){
+    char temp = arr[start];
+    arr[start++] = arr[end];
+    arr[end--] = temp;
+    }
+}
+
+void reverseStringWordWise(char input[]) {
+    // Write your code here
+    //1st approach
+    int count = 0;
+    for(int i =0; input[i] != '\0'; i++){
+        count++;
+    }
+//     char temp[count];
+//     int tempIndex = 0;
+//     int k = count-1;
+//     int j =count-1;// tracks last element of a word
+//     for(; j>=0; j--){
+//         if(input[j] == ' '){
+//             for(int n = j+1; n<=k; n++){
+//                 temp[tempIndex] = input[n];
+//                 tempIndex++;
+//             }
+//             temp[tempIndex] = ' ';
+//             tempIndex++;
+//              k = j-1;
+//         }
+       
+        
+//         j--;
+//     }
+//     for(int l = j+1; l <=k;l++){
+//         temp[tempIndex] = input[l];
+//         tempIndex++;
+//     }
+    
+//     for(int i = 0; i<count; i++){
+//         input[i] = temp[i];
+//     }
+    int i = 0;
+    int j = count-1;
+    reverseWord(input,i,j);
+    int start = 0;
+    for(int g = 0 ; g<=j+1; g++){
+        if(input[g] == ' ' || input[g] == '\0'){
+         reverseWord(input,start,g-1);
+            start = g+1;
+        }
+    }
+    
+    
+    
+    
+    
+}
