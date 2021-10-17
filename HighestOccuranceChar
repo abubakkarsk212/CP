@@ -1,0 +1,20 @@
+i/p - aabbaa
+o/p a
+
+char highestOccurringChar(char input[]) {
+    // Write your code here
+  int arr[26]={0};
+    int maxFreq = 0;
+  for(int i =0; input[i]!='\0';i++){
+   arr[input[i]-'a']+=1;
+      if(arr[input[i]-'a']>maxFreq){
+          maxFreq = arr[input[i]-'a'];
+      }
+  }
+    for(int i = 0; input[i]!='\0';i++){
+        if(arr[input[i]-'a'] == maxFreq){
+                return input[i];   
+        }
+    }
+ 
+}
