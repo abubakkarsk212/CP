@@ -1,0 +1,28 @@
+i/p aabbc. -- o/p abc
+
+void removeConsecutiveDuplicates(char input[]) {
+    // Write your code here
+//     int a[256] ={0};
+//     for(int i =0 ; input[i]!='\0';i++){
+//         a[input[i]]++;
+//     }
+//     int index= 0;
+//     for(int j =0; j<256; j++){
+//         int no = a[j];
+//         if(no!=0){
+//              input[index]=j;
+//             index++;
+//         }
+           
+        
+//     }
+//     input[index]='\0';
+    int start = 0;
+    for(int i = 1; i<=strlen(input);i++){
+        if(input[i]!=input[start]){
+            input[start+1]=input[i];
+            start++;
+        }
+    }
+    
+}
