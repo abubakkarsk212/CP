@@ -1,0 +1,16 @@
+e.g aabbccdd
+    To remove: a. o/p = bbccdd
+    
+    
+    void removeAllOccurrencesOfChar(char input[], char c) {
+    // Write your code here
+    int sameT =0; //It tracks the given character to be removed with other char
+    for(int i =0; input[i]!='\0';i++){
+        if(input[i]!=c){
+            input[sameT]=input[i];
+             sameT++;
+        }
+    }
+    input[sameT]='\0';
+    
+}
