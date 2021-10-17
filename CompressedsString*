@@ -1,0 +1,46 @@
+string getCompressedString(string &input) {
+    // Write your code here.
+//     int t =0;
+//     int count = 1;
+//     int len =input.length();
+//     string str ="";
+//     for(int i =0; i<len;i++){
+//         if(input[i] == input[i+1]){
+//             count++;
+//         }else{
+//             // str+=input[t++];
+//             input[t++] = input[i];
+        
+//             if(count>1){
+//                 // string v = to_string(count);
+//                 input[t++] = count+48;
+//                 // str+=v;
+//                 // t=i+1;
+//                 count = 1;
+//             }
+//         }
+        
+//     }
+    
+
+//     return input.substr(0, t);
+    //Efficient code
+    int start = 0;
+    int end = 0;
+    string compressed = "";
+    while(end < input.length()){
+        while(end <input.length() && input[start] == input[end]){
+            end++;
+        }
+        int totChar = end - start;
+        if(totChar>1){
+            compressed+=input[start];
+            compressed+=(int)(totChar+'0');
+            
+        }else{
+            compressed+=input[start];
+        }
+        start = end;
+    }
+    return compressed;
+}
