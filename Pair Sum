@@ -7,7 +7,7 @@ You have been given an integer array/list(ARR) and a number 'num'. Find and retu
 
 o/p
 7
-//Tc = O(n)
+//Tc = O(nlogn)
 #include <bits/stdc++.h>
 using namespace std;
 int pairSum(int *arr, int n, int num)
