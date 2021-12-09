@@ -1,0 +1,37 @@
+Node *reverse(Node *head){
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+    Node *reverseN = reverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return reverseN;
+}
+Node* NextLargeNumber(Node *head) {
+    /* Don't write main().
+     * Don't read input, it is passed as function argument.
+     * Return output and don't print it.
+     * Taking input is handled automatically.
+     */
+    
+    head = reverse(head);
+    Node *curr = head;
+    
+    int carry = 1;
+    while(curr!=NULL){
+        int sum = curr->data + carry;
+        int digit = sum %10;
+        carry = sum/10;
+        curr->data = digit;
+        if(curr->next == NULL){
+            break;
+        }
+        curr=curr->next;
+    }
+    if(carry){
+        Node *newNode = new Node(carry);
+        curr->next = newNode;
+    }
+     head = reverse(head);
+    return head;
+}
