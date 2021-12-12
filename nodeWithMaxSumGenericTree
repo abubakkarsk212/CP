@@ -1,0 +1,50 @@
+class Pair{
+    public:
+    TreeNode<int>* node;
+    int sum;
+    
+};
+Pair maxSumPair(TreeNode<int>* root) {
+    //By recursion
+    Pair maxPair;
+    maxPair.node = root;
+    int s = root->data;;
+    for(int i =0; i<root->children.size();i++){
+        s+=root->children[i]->data;
+    }
+    maxPair.sum = s;
+    for(int i =0; i<root->children.size();i++){
+        Pair smallAns = maxSumPair(root->children[i]);
+        if(smallAns.sum > s){
+           maxPair =smallAns; 
+        }
+    }
+    return maxPair;
+}
+TreeNode<int>* maxSumNode(TreeNode<int>* root) {
+    // Write your code here
+//     int maxData =0;
+//     TreeNode<int>* maxNode = root;
+//     queue<TreeNode<int>*> pendingNodes;
+//     pendingNodes.push(root);
+//     while(pendingNodes.size()!=0){
+        
+//         TreeNode<int> *childNode = pendingNodes.front();
+//         int sum = childNode->data;
+//         pendingNodes.pop();
+//         for(int i = 0; i<childNode->children.size();i++){
+//             sum+=childNode->children[i]->data;
+//             pendingNodes.push(childNode->children[i]);
+//         }
+//         if(sum > maxData){
+//             maxData = sum;
+//             maxNode = childNode;
+//         }
+        
+//     }
+//     return maxNode;
+    
+    //By recursion
+    return maxSumPair(root).node;
+    
+}
