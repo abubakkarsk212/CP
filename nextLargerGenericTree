@@ -1,0 +1,26 @@
+//Given a generic tree and an integer n. Find and return the node with next larger element in the tree i.e. find a node with value just greater than n.
+//Note: Return NULL if no node is present with the value greater than n.
+
+TreeNode<int>* getNextLargerElement(TreeNode<int>* root, int x) {
+    // Write your code here
+  if(root == NULL){
+      return root;
+  }
+    TreeNode<int>* rootNode = NULL;
+   if(root->data > x){
+       rootNode = root;
+   }
+    for(int i =0; i<root->children.size();i++){
+        TreeNode<int>* smallAns = getNextLargerElement(root->children[i],x);
+        if(rootNode == NULL ){
+            rootNode = smallAns;
+        }
+      
+        else if(smallAns!=NULL &&rootNode->data > smallAns->data){
+            rootNode = smallAns;
+        }
+        }
+        
+    
+    return rootNode;
+}
