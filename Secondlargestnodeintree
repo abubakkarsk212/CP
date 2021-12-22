@@ -1,0 +1,74 @@
+  Following is the structure for the TreeNode class
+
+    template <typename T>
+    class TreeNode {
+     public:
+        T data;
+        vector<TreeNode<T>*> children;
+
+        TreeNode(T data) {
+            this->data = data;
+        }
+
+        ~TreeNode() {
+            for (int i = 0; i < children.size(); i++) {
+                delete children[i];
+            }
+        }
+    };
+
+************************************************************/
+class Pair{
+  public:
+  TreeNode<int> *max;
+  TreeNode<int> *smax; 
+  Pair(TreeNode<int> *max,TreeNode<int> *smax ){
+      this->max = max;
+      this->smax = smax;
+  }  
+};
+
+Pair *getSecondLPair(TreeNode<int>* root){
+  
+    Pair *p = new Pair(root,NULL);
+    for(int i =0; i<root->children.size();i++){
+        Pair *smallAns = getSecondLPair(root->children[i]);
+        if(smallAns->max->data > p->max->data){
+            if(smallAns->smax!=NULL){
+            if(smallAns->smax->data > p->max->data){
+                p->smax = smallAns->smax;
+           
+            }else{
+                p->smax = p->max;
+            }
+            p->max = smallAns->max;
+            }else{
+                p->smax = p->max;
+                p->max = smallAns->max;
+            }
+
+    }else{
+            
+            // if(p->smax == NULL){
+            //     p->smax = smallAns->max;
+            // }else
+            //     if(smallAns->max->data > p->smax->data && smallAns->max->data!= p->max->data){
+            //         p->smax = smallAns->max;
+            //     }
+            
+                if((p->smax == NULL || smallAns->max->data > p->smax->data) && smallAns->max->data!=p->max->data){
+                    p->smax = smallAns->max; 
+                }
+          
+        }
+       
+        
+    }
+    return p;
+}
+TreeNode<int>* getSecondLargestNode(TreeNode<int>* root) {
+    // Write your code here
+    
+   
+    return getSecondLPair(root)->smax;
+}
