@@ -1,0 +1,41 @@
+BinaryTreeNode<int>* buildTree1(int *preorder, int prS,int prE, int *inorder, int inS,int inE) {
+    // Write your code here
+   //Base case
+    if(prS>prE || inS >inE){
+        return NULL;
+    }
+    //Root value
+    int rootV = preorder[prS];
+    //Build root node
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootV);
+    int inLE;
+    int inLS = inS;
+    int inRE;
+    int inRS;
+    int preLE;
+    int preLS = prS+1;
+    int preRE;
+    int preRS;
+    //let find root index
+    int rootI;
+    for(int i = inS; i<=inE;i++){
+        if(inorder[i] == rootV){
+            rootI = i;
+        }
+    }
+    inLE = rootI-1;
+    inRS = rootI+1;
+    inRE = inE;
+    preLE = inLE -inLS+preLS;
+    preRS = preLE+1;
+    preRE = prE;
+    root->left = buildTree1(preorder,preLS,preLE,inorder,inLS,inLE);
+    root->right = buildTree1(preorder,preRS,preRE,inorder,inRS,inRE);
+    return root;
+    
+}
+
+BinaryTreeNode<int>* buildTree(int *preorder, int preLength, int *inorder, int inLength) {
+    // Write your code here
+    return buildTree1(preorder,0,preLength-1,inorder,0,inLength-1);
+}
