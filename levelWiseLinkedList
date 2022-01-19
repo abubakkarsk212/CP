@@ -1,0 +1,43 @@
+# here we need to store linked list of each level in a list
+
+vector<Node<int>*> constructLinkedListForEachLevel(BinaryTreeNode<int> *root) {
+    // Write your code here
+    if(root == NULL) return {NULL};
+    vector<Node<int>*> headNodes;
+    queue<BinaryTreeNode<int>*> pending;
+    pending.push(root);
+    pending.push(NULL);
+     Node<int> *front = NULL;
+     Node<int> *rear = NULL;
+    while(pending.front()!=NULL){
+       
+       
+            BinaryTreeNode<int> *frontNode = pending.front();
+            pending.pop();
+            Node<int> *node = new Node<int>(frontNode->data);
+            if(front == NULL){
+                front = node;
+                rear = node;
+            }else{
+                rear->next = node;
+                rear = rear->next;
+            }
+            if(frontNode->left)
+                pending.push(frontNode->left);
+            if(frontNode->right)
+                pending.push(frontNode->right);
+            
+   
+        if(pending.front() ==NULL){
+         pending.pop();
+         pending.push(NULL);
+         headNodes.push_back(front); 
+         front = NULL;
+         rear = NULL;   
+        }
+    
+         
+    }
+    return headNodes;
+    
+}
