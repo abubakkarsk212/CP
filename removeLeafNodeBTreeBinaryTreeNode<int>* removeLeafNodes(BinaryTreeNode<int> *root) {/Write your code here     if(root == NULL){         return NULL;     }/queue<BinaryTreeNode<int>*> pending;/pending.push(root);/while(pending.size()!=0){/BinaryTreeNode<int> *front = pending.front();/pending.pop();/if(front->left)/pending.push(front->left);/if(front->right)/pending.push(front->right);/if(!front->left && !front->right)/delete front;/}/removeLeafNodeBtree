@@ -1,0 +1,29 @@
+BinaryTreeNode<int>* removeLeafNodes(BinaryTreeNode<int> *root) {
+    // Write your code here
+    if(root == NULL){
+        return NULL;
+    }
+//     queue<BinaryTreeNode<int>*> pending;
+//     pending.push(root);
+//     while(pending.size()!=0){
+//         BinaryTreeNode<int> *front = pending.front();
+//         pending.pop();
+//         if(front->left)
+//             pending.push(front->left);
+//         if(front->right)
+//             pending.push(front->right);
+//         if(!front->left && !front->right)
+//             delete front;
+//     }
+    
+//     return root;
+    if(!root->left && !root->right){
+        delete root;
+        return NULL;
+    }
+    BinaryTreeNode<int> *left = removeLeafNodes(root->left);
+    BinaryTreeNode<int> *right = removeLeafNodes(root->right);
+    root->left = left;
+    root->right = right;
+    return root;
+}
