@@ -1,0 +1,21 @@
+#include<climits>
+int maximum(BinaryTreeNode<int> *root){
+    if(root == NULL) return INT_MIN;
+    return max(root->data,max(maximum(root->left),maximum(root->right)));
+}
+int minimum(BinaryTreeNode<int> *root){
+    if(root == NULL) return INT_MAX;
+    return min(root->data,min(minimum(root->left),minimum(root->right)));
+}
+bool isBST(BinaryTreeNode<int> *root) {
+	// Write your code here
+    if(root == NULL) return true;
+    int leftMax = maximum(root->left);
+    int rightMin = minimum(root->right);
+    bool output = root->data > leftMax && rightMin >= root->data && isBST(root->left) && isBST(root->right);
+    
+    return output;
+}
+//T.c for line 15 T(n) = 2T(n/2)+n -- as for max min it visit all the nodes
+//So for complete BTree it is nlogn
+//For skew O(n2)
