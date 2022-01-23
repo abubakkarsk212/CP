@@ -7,15 +7,56 @@ int minimum(BinaryTreeNode<int> *root){
     if(root == NULL) return INT_MAX;
     return min(root->data,min(minimum(root->left),minimum(root->right)));
 }
+//Here t.c is O(n) as it 
+pair<pair<int,int>,bool> isBST2(BinaryTreeNode<int> *root){
+    if(root == NULL){
+        pair<pair<int,int>,bool> res;
+        pair<int,int> minmax;
+        minmax.first = INT_MAX;
+        minmax.second = INT_MIN;
+        res.first = minmax;
+        res.second = true;
+        return res;
+        }
+    
+    pair<pair<int,int>,bool> left = isBST2(root->left);
+    pair<pair<int,int>,bool> right = isBST2(root->right);
+    int minil = left.first.first;
+    int maxil = left.first.second;
+    
+    int minir = right.first.first;
+    int maxir = right.first.second;
+    
+    bool isBstl = left.second;
+    bool isBstr = right.second;
+    
+    int maxL = max(root->data,max(maxir,maxil));
+    int minL = min(root->data,min(minil,minir));
+    
+    pair<pair<int,int>,bool> res;
+    pair<int,int> temp;
+    temp.first = minL;
+    temp.second = maxL;
+    bool isbst = (root->data > maxil) && (root->data <= minir) && isBstl && isBstr;
+    res.first = temp;
+    res.second = isbst;
+    return res;  
+}
+//T.c = o(n)
+bool isBST3(BinaryTreeNode<int> *root,int minimum = INT_MIN, int maximum = INT_MAX){
+    if(root == NULL) return true;
+    if(root->data > maximum || root->data < minimum) return false;
+    bool isLeftOk = isBST3(root->left,minimum,root->data-1);
+    bool isRightOk = isBST3(root->right,root->data,maximum);
+    return isLeftOk && isRightOk;
+     
+}
 bool isBST(BinaryTreeNode<int> *root) {
 	// Write your code here
-    if(root == NULL) return true;
-    int leftMax = maximum(root->left);
-    int rightMin = minimum(root->right);
-    bool output = root->data > leftMax && rightMin >= root->data && isBST(root->left) && isBST(root->right);
+    // if(root == NULL) return true;
+    // int leftMax = maximum(root->left);
+    // int rightMin = minimum(root->right);
+    // bool output = root->data > leftMax && rightMin >= root->data && isBST(root->left) && isBST(root->right);
     
-    return output;
+    return isBST3(root);
 }
-//T.c for line 15 T(n) = 2T(n/2)+n -- as for max min it visit all the nodes
-//So for complete BTree it is nlogn
-//For skew O(n2)
