@@ -1,0 +1,23 @@
+BinaryTreeNode<int>*helper (int *input,int s , int e ){
+    if(s>e){
+        return NULL;
+    }
+    //Here i was doing wrong
+    //int mid = (e-s)/2. take care
+    int mid = (s + e)/2;
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(input[mid]);
+    
+    root->left = helper (input, s,mid-1);
+    root->right = helper (input,mid+1 , e);
+    return root;
+    
+}
+
+
+
+BinaryTreeNode<int>* constructTree(int *input, int n) {
+	// Write your code here
+  
+    BinaryTreeNode<int>* root = helper(input,0,n-1);
+    return root ;
+}
