@@ -1,0 +1,18 @@
+//T.c O(N)
+//S.c O(logn)
+int getLCA(BinaryTreeNode <int>* root , int a, int b) {
+    // Write your code here
+    if(root == NULL) return -1;
+    
+    //first check whether root is a or b
+    if(root->data == a || root->data == b) return root->data;
+    
+    int n1 = getLCA(root->left,a,b);
+    int n2 = getLCA(root->right,a,b);
+    
+    if(n1!=-1 && n2 == -1) return n1;
+    else if(n1==-1 && n2 != -1) return n2;
+    else if(n1!=-1 && n2 != -1) return root->data;
+    else return -1;
+        
+}
