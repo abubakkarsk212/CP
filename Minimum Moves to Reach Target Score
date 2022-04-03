@@ -1,0 +1,24 @@
+    //This is gready problem and we will start from target to 1
+    int minMoves(int target, int maxDoubles) {
+        int ans = 0;
+        while(target>1){
+            if(maxDoubles == 0){
+                        break;
+                    }
+            if(target%2 == 0){
+                
+                if(maxDoubles>0){
+                    target/=2;
+                    maxDoubles--;
+                    
+                }else{
+                 target--;   
+                }
+            }else{
+                target--; 
+            }
+            ans++;
+        }
+        ans+=(target-1);
+        return ans;
+    }
