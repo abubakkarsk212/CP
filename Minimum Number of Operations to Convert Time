@@ -1,0 +1,30 @@
+int byGreedy(string current, string correct) {
+        
+        
+        int h = (current[0]-'0')*10+(current[1]-'0');
+        int m = (current[3]-'0')*10+(current[4]-'0');
+        int mincurrent = h*60+m;
+        
+        int hc = (correct[0]-'0')*10+(correct[1]-'0');
+        int mc = (correct[3]-'0')*10+(correct[4]-'0');
+        int mincorrect = hc*60+mc;
+        
+        int timediff = mincorrect-mincurrent;
+        int count = 0;
+        while(timediff){
+            if(timediff>=60){
+                timediff-=60;
+            }else if(timediff>=15){
+                timediff-=15;
+                
+            }else if(timediff>=5){
+                timediff-=5;
+                
+            }else{
+                timediff--;
+            }
+            count++;
+        }
+        return count;
+        
+    }
