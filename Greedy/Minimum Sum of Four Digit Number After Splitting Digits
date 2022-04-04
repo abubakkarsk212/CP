@@ -1,0 +1,26 @@
+ int minimumSum(int num) {
+       int verymin=INT_MAX;
+       int min=INT_MAX;
+       int large = INT_MIN,verylar = INT_MIN;
+       while(num){
+           int a = num%10;
+           if(a <verymin){
+               min = verymin;
+               verymin = a;
+           }else if(a < min){
+               min = a;
+           }
+           
+            if(a > verylar){
+               large = verylar;
+               verylar = a;
+           }else if(a > large){
+               large = a;
+           }
+           num/=10;
+       } 
+       int a = verymin *10 + verylar;
+       int b = min * 10 + large;
+        return a+b;
+        
+    }
