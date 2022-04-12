@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+void isConnectedDFS(int **mat,int n,int sv,bool *visited){
+    
+    visited[sv]=true;
+    //Now we need to print its adjacent element
+    for(int i =0; i<n;i++){
+    // here the issue is if 0 - 1- 2 it will go to 1 and 1 adjacent is 0 again go
+    //to 0 and it will loop
+    if(i == sv){
+    continue;
+    }
+    if(mat[sv][i] == 1){
+    if(visited[i]){
+    continue;
+    }
+    isConnectedDFS(mat,n,i,visited);
+    }
+    }
+}
+int main() {
+    // Write your code here
+    // Write your code here
+    int n,e;
+	cin>>n>>e;
+
+//Now we need a 2d matrix to store
+	int **mat = new int*[n];
+    for(int i =0; i<n;i++){
+        mat[i] = new int[n];
+        //As garbage fill with 0-means no edge
+        for(int j =0; j<n;j++){
+        	mat[i][j] = 0;
+       	 }
+
+    }
+    //for edges
+    for(int i =0; i<e;i++){
+        int f,s;
+        cin>>f>>s;
+        mat[f][s] = 1;
+        mat[s][f] = 1;
+
+    }
+    bool *visited = new bool[n];
+    for(int i =0; i<n;i++){
+    visited[i] = false;
+    }
+     
+   isConnectedDFS(mat,n,0,visited);
+    for(int i =0; i<n;i++){
+        if(!visited[i]){
+            cout<<"false";
+            return 0;
+        }
+    }
+    cout<<"true";
+}
