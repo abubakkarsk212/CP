@@ -1,0 +1,81 @@
+#include <iostream>
+#include<unordered_map>
+#include<queue>
+using namespace std;
+
+void pathBFS(int **mat,int n,int sv,int dest){
+    unordered_map<int,int> um;
+    bool *visited = new bool[n];
+    for(int i =0; i<n;i++){
+    visited[i] = false;
+    }
+   
+    if(n == 0){
+        return;
+    }
+    queue<int> q;
+    q.push(sv);
+    visited[sv] = true;
+    bool isPresent = false;
+    while(!q.empty()){
+        int front = q.front();
+        q.pop();
+        for(int i =0; i<n;i++){
+// here the issue is if 0 - 1- 2 it will go to 1 and 1 adjacent is 0 again go
+//to 0 and it will loop
+            if(i == front) continue;
+    
+    if(mat[front][i] == 1 && !visited[i]){
+       
+        visited[i] = true;
+        um[i] = front;
+        q.push(i);
+         if(i == dest){
+             isPresent = true;
+             break;
+         }
+    	}
+    }
+    }
+    if(!isPresent) return;
+    int index = dest;
+    while(true){
+        cout<<index<<" ";
+        if(index == sv){
+            break;
+        }
+        index = um[index];
+        
+    }
+    
+}
+
+int main() {
+    // Write your code here
+    int n,e;
+	cin>>n>>e;
+
+//Now we need a 2d matrix to store
+	int **mat = new int*[n];
+    for(int i =0; i<n;i++){
+        mat[i] = new int[n];
+        //As garbage fill with 0-means no edge
+        for(int j =0; j<n;j++){
+        	mat[i][j] = 0;
+       	 }
+
+    }
+    //for edges
+    for(int i =0; i<e;i++){
+        int f,s;
+        cin>>f>>s;
+        mat[f][s] = 1;
+        mat[s][f] = 1;
+
+    }
+    int v1,v2;
+	cin>>v1>>v2;
+     
+   pathBFS(mat,n,v1,v2);
+   
+}
